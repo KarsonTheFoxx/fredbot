@@ -16,9 +16,9 @@ async def main():
     bot.sqlite_connection = sqlite3.connect("database.db")
     bot.sqlite_cursor = bot.sqlite_connection.cursor()
     bot.sqlite_cursor.execute("CREATE TABLE IF NOT EXISTS Admins (id INTEGER PRIMARY KEY UNIQUE)")
-    bot.sqlite_cursor.execute("CREATE TABLE IF NOT EXISTS Config (log INTEGER, role INTEGER)")
+    bot.sqlite_cursor.execute("CREATE TABLE IF NOT EXISTS Config (log INTEGER, role INTEGER, freddie INTEGER)")
     bot.sqlite_cursor.execute("CREATE TABLE IF NOT EXISTS Admins (id INTEGER PRIMARY KEY UNIQUE)")
-    bot.sqlite_cursor.execute("INSERT INTO Config (log, role) VALUES (?, ?)", (0, 0))
+    bot.sqlite_cursor.execute("INSERT INTO Config (log, role, freddie) VALUES (?, ?, ?)", (0, 0, 0))
     try:
         bot.sqlite_cursor.execute("INSERT INTO Admins (id) VALUES (?)", (855948446540496896,))
     except sqlite3.IntegrityError:
