@@ -30,11 +30,19 @@ async def main():
     @bot.event
     async def on_ready():
         print("ready")
+        await bot.wait_until_ready()
         await bot.change_presence(status=Status.idle)
+        origins = bot.get_guild(826685546772168734).get_channel(1161528232965836931)
+        council = bot.get_guild(1166799644362276967).get_channel(1282534413430689963)
+        for message in await origins.history().flatten():
+            if message.author.id == bot.user.id:
+                await message.delete()
+        for message in await council.history().flatten():
+            if message.author.id == bot.user.id:
+                await message.delete()
 
     @bot.event
     async def on_message(message:Message):
-        print("message")
         if message.channel.id == 1166799644970467411 and not message.author.bot:
             delta_time = datetime.now(timezone.utc) - message.author.joined_at
             if delta_time.days < 8:
